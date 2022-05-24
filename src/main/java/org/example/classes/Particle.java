@@ -13,6 +13,13 @@ public class Particle {
         this.bestResult = RastriginFunction.calculateResult(this.position);
     }
 
+    public Particle(Point p, Double range){
+        this.position = p;
+        this.velocity = new Point(p.getCoordinates().size(), range / 2.0);
+        this.bestPosition = this.position;
+        this.bestResult = RastriginFunction.calculateResult(this.position);
+    }
+
     private void calculateNewResult() {
         Long newResult = RastriginFunction.calculateResult(position);
         if (bestResult > newResult) {

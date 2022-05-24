@@ -10,7 +10,8 @@ public class ParticleSwarmOrganization {
     private final Double swarmCoefficient;
     private Point bestSwarmPosition;
     private Long bestSwarmResult;
-    private Double inertia;
+    private Double maxInertia;
+    private final Double minInertia;
     private Double selfDeviation;
     private Double swarmDeviation;
 
@@ -21,11 +22,63 @@ public class ParticleSwarmOrganization {
         }
         this.bestSwarmPosition = swarm.get(0).getBestPosition();
         this.bestSwarmResult = swarm.get(0).getBestResult();
-        this.inertia = 0.5;
-        this.selfCoefficient = 2.0;
+        this.minInertia = 0.5;
+        this.maxInertia = 0.9;
+        this.selfCoefficient = 1.0;
         this.swarmCoefficient = 2.0;
         this.selfDeviation = 0.5;
         this.swarmDeviation = 0.5;
+    }
+
+    public ParticleSwarmOrganization(int size, int numberOfDimentions, Double range,
+                                     Double minInertia, Double maxInertia,
+                                     Double selfCoefficient, Double selfDeviation,
+                                     Double swarmCoefficient,Double swarmDeviation) {
+        this.swarm = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            this.swarm.add(new Particle(numberOfDimentions, range));
+        }
+        this.bestSwarmPosition = swarm.get(0).getBestPosition();
+        this.bestSwarmResult = swarm.get(0).getBestResult();
+        this.minInertia = minInertia;
+        this.maxInertia = maxInertia;
+        this.selfCoefficient = selfCoefficient;
+        this.swarmCoefficient = swarmCoefficient;
+        this.selfDeviation = selfDeviation;
+        this.swarmDeviation = swarmDeviation;
+    }
+
+    public ParticleSwarmOrganization(List<Point> startPoints, Double range){
+        this.swarm = new ArrayList<>();
+        for (Point p : startPoints) {
+            this.swarm.add(new Particle(p, range));
+        }
+        this.bestSwarmPosition = swarm.get(0).getBestPosition();
+        this.bestSwarmResult = swarm.get(0).getBestResult();
+        this.minInertia = 0.5;
+        this.maxInertia = 0.9;
+        this.selfCoefficient = 1.0;
+        this.swarmCoefficient = 2.0;
+        this.selfDeviation = 0.5;
+        this.swarmDeviation = 0.5;
+    }
+
+    public ParticleSwarmOrganization(List<Point> startPoints, Double range,
+                                     Double minInertia, Double maxInertia,
+                                     Double selfCoefficient, Double selfDeviation,
+                                     Double swarmCoefficient,Double swarmDeviation) {
+        this.swarm = new ArrayList<>();
+        for (Point p : startPoints) {
+            this.swarm.add(new Particle(p, range));
+        }
+        this.bestSwarmPosition = swarm.get(0).getBestPosition();
+        this.bestSwarmResult = swarm.get(0).getBestResult();
+        this.minInertia = minInertia;
+        this.maxInertia = maxInertia;
+        this.selfCoefficient = selfCoefficient;
+        this.swarmCoefficient = swarmCoefficient;
+        this.selfDeviation = selfDeviation;
+        this.swarmDeviation = swarmDeviation;
     }
 
     public void updateBestResult() {
@@ -42,7 +95,7 @@ public class ParticleSwarmOrganization {
         this.selfDeviation = random.nextDouble();
         this.swarmDeviation = random.nextDouble();
         for (Particle particle : swarm) {
-            particle.step(bestSwarmPosition, inertia,
+            particle.step(bestSwarmPosition, maxInertia,
                     selfCoefficient, selfDeviation,
                     swarmCoefficient, swarmDeviation);
         }
@@ -50,22 +103,21 @@ public class ParticleSwarmOrganization {
     }
 
     public Long findBestResult(int numberOfSteps) {
-        double delta = 0.5 / numberOfSteps;
-
+        double delta = (maxInertia - minInertia) / numberOfSteps;
         updateBestResult();
         int i = 0;
         long previousResult = bestSwarmResult;
         while (i < numberOfSteps) {
             nextStep();
-            //if (previousResult != bestSwarmResult) {
-//            inertia -= delta;
+            if (previousResult != bestSwarmResult) {
+                maxInertia -= delta;
                 previousResult = bestSwarmResult;
                 System.out.println("Step: " + i);
                 System.out.println("Best swarm position: " + bestSwarmPosition);
                 System.out.println("Best swarm result: " + bestSwarmResult);
                 System.out.println("---------------------------------------------------------");
-                i++;
-            //}
+            }
+            i++;
         }
         return bestSwarmResult;
     }
