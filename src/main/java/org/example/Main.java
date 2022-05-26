@@ -1,13 +1,7 @@
 package org.example;
 
 
-import org.example.classes.GeneticAlgorithm;
-import org.example.classes.Particle;
-import org.example.classes.ParticleSwarmOrganization;
-import org.example.classes.Point;
-
-import javax.sound.midi.Soundbank;
-import java.util.List;
+import org.example.classes.algorithm.GeneticAlgorithm;
 
 public class Main {
     public static void main(String[] args) {

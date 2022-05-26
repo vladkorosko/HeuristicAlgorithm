@@ -1,4 +1,7 @@
-package org.example.classes;
+package org.example.classes.algorithm;
+
+import org.example.classes.entities.BinaryNumber;
+import org.example.classes.entities.Point;
 
 import java.util.ArrayList;
 import java.util.List;

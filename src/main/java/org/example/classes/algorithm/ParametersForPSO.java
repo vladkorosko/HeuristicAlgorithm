@@ -1,4 +1,4 @@
-package org.example.classes;
+package org.example.classes.algorithm;
 
 public class ParametersForPSO {
     public Double maxInertia;

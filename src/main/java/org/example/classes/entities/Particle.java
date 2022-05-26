@@ -1,4 +1,6 @@
-package org.example.classes;
+package org.example.classes.entities;
+
+import org.example.classes.functions.RastriginFunction;
 
 public class Particle {
     private Point position;

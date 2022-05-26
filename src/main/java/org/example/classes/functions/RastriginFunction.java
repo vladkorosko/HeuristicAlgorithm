@@ -1,4 +1,6 @@
-package org.example.classes;
+package org.example.classes.functions;
+
+import org.example.classes.entities.Point;
 
 public class RastriginFunction {
     private static final Integer A = 10;

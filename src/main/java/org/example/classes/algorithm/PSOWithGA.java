@@ -1,4 +1,8 @@
-package org.example.classes;
+package org.example.classes.algorithm;
+
+import org.example.classes.algorithm.ParticleSwarmOrganization;
+import org.example.classes.entities.Particle;
+import org.example.classes.entities.Point;
 
 import java.util.ArrayDeque;
 import java.util.List;

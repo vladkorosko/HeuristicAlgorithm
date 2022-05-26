@@ -1,4 +1,6 @@
-package org.example.classes;
+package org.example.classes.algorithm;
+
+import org.example.classes.entities.Point;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
