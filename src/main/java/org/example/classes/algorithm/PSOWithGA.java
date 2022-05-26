@@ -1,8 +1,8 @@
 package org.example.classes.algorithm;
 
-import org.example.classes.algorithm.ParticleSwarmOrganization;
 import org.example.classes.entities.Particle;
 import org.example.classes.entities.Point;
+import org.example.classes.functions.TestOptimizationFunction;
 
 import java.util.ArrayDeque;
 import java.util.List;
@@ -10,18 +10,15 @@ import java.util.List;
 public class PSOWithGA extends ParticleSwarmOrganization {
     private final ArrayDeque<Point> bestPoints;
 
-    public ArrayDeque<Point> getBestPoints() {
-        return bestPoints;
-    }
-
     public PSOWithGA(int size, int numberOfDimentions, Double range,
                      Double minInertia, Double maxInertia,
                      Double selfCoefficient, Double selfDeviation,
-                     Double swarmCoefficient, Double swarmDeviation, Integer generationSize){
+                     Double swarmCoefficient, Double swarmDeviation, Integer generationSize,
+                     TestOptimizationFunction function) {
         super(size, numberOfDimentions, range,
                 minInertia, maxInertia,
                 selfCoefficient, selfDeviation,
-                swarmCoefficient, swarmDeviation);
+                swarmCoefficient, swarmDeviation, function);
         bestPoints = new ArrayDeque<>();
         for (int i = 0; i < generationSize; i++) {
             bestPoints.addFirst(swarm.get(i).getBestPosition());
@@ -31,15 +28,20 @@ public class PSOWithGA extends ParticleSwarmOrganization {
     public PSOWithGA(List<Point> startPoints, Double range,
                      Double minInertia, Double maxInertia,
                      Double selfCoefficient, Double selfDeviation,
-                     Double swarmCoefficient, Double swarmDeviation, Integer generationSize){
+                     Double swarmCoefficient, Double swarmDeviation, Integer generationSize,
+                     TestOptimizationFunction function) {
         super(startPoints, range,
                 minInertia, maxInertia,
                 selfCoefficient, selfDeviation,
-                swarmCoefficient, swarmDeviation);
+                swarmCoefficient, swarmDeviation, function);
         bestPoints = new ArrayDeque<>();
         for (int i = 0; i < generationSize; i++) {
             bestPoints.addFirst(swarm.get(i).getBestPosition());
         }
+    }
+
+    public ArrayDeque<Point> getBestPoints() {
+        return bestPoints;
     }
 
     @Override

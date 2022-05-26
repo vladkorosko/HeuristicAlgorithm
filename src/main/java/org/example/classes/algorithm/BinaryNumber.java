@@ -1,4 +1,4 @@
-package org.example.classes.entities;
+package org.example.classes.algorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ public class BinaryNumber {
 
     public BinaryNumber(Integer dec) {
         this.number = new ArrayList<>();
-        while(dec > 1){
+        while (dec > 1) {
             int newNumber = dec % 2;
             dec /= 2;
             this.number.add(newNumber);
@@ -27,26 +27,25 @@ public class BinaryNumber {
         return result;
     }
 
-    public void convertNumberToNBits(int n){
+    public void convertNumberToNBits(int n) {
         for (int i = number.size(); i < n; i++) {
             this.number.add(0);
         }
-        while (number.size() > n){
-            this.number.remove(number.size()-1);
+        while (number.size() > n) {
+            this.number.remove(number.size() - 1);
         }
     }
 
-    public void numberPlusOne(){
+    public void numberPlusOne() {
         for (int i = 0; i < number.size(); i++) {
             number.set(i, number.get(i) + 1);
-            if(number.get(i) == 2){
-                number.set(i,0);
-                if (i == number.size()-1){
+            if (number.get(i) == 2) {
+                number.set(i, 0);
+                if (i == number.size() - 1) {
                     number.add(1);
                     break;
                 }
-            }
-            else{
+            } else {
                 break;
             }
         }

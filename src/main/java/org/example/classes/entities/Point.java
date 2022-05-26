@@ -59,7 +59,7 @@ public class Point {
             else if (coordinates.get(i) < (-1) * range) {
                 coordinates.set(i, coordinates.get(i) + 2.0 * range);
             }
-            coordinates.set(i,roundCoordinate(coordinates.get(i)));
+            coordinates.set(i, roundCoordinate(coordinates.get(i)));
         }
     }
 
@@ -67,7 +67,7 @@ public class Point {
         return coordinates;
     }
 
-    public Double getRange(){
+    public Double getRange() {
         return range;
     }
 
