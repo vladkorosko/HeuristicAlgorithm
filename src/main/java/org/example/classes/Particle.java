@@ -28,16 +28,8 @@ public class Particle {
         }
     }
 
-    public Point getPosition() {
-        return position;
-    }
-
     public Point getBestPosition() {
         return bestPosition;
-    }
-
-    public Point getVelocity() {
-        return velocity;
     }
 
     public Long getBestResult() {
@@ -53,15 +45,25 @@ public class Particle {
         Point swarmInfluence = Point.scaleCoordinates(Point.subtractPoint(bestSwarmResult, position),
                 swarmCoefficient * swarmDeviation);
         this.velocity = Point.addPoint(Point.addPoint(selfInfluence, swarmInfluence), newVelocity);
+        this.velocity.normaliseCoordinates();
     }
 
-    void step(Point bestSwarmResult, Double inertia,
+    public void step(Point bestSwarmResult, Double inertia,
               Double selfCoefficient, Double selfDeviation,
               Double swarmCoefficient, Double swarmDeviation) {
         this.position = Point.addPoint(position, velocity);
+        this.position.normaliseCoordinates();
         calculateNewResult();
         calculateNewVelocity(bestSwarmResult, inertia,
                 selfCoefficient, selfDeviation,
                 swarmCoefficient, swarmDeviation);
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public Point getVelocity() {
+        return velocity;
     }
 }
